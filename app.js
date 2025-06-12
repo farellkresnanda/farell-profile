@@ -3,12 +3,12 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+// Serve static files
+app.use(express.static(path.join(__dirname, '/public')));
+
 // Set up EJS as view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-// Serve static files
-app.use(express.static(path.join(__dirname, '/public')));
 
 // Profile data (from your CV)
 const profileData = {
@@ -77,10 +77,6 @@ app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/
     profile: profileData,
     activeSection: section
   });
-});
-
-app.get('/profile.jpg', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'images', 'profile.jpg'));
 });
 
 // Start server
