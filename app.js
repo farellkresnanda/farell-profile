@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const fs = require('fs');
 
-const options = {
+const sslOptions = {
     key: fs.readFileSync('/etc/letsencrypt/live/profile.kresnansite.my.id/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/profile.kresnansite.my.id/cert.pem'),
     ca: fs.readFileSync('/etc/letsencrypt/live/profile.kresnansite.my.id/chain.pem'),
