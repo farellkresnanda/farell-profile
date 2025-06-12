@@ -79,6 +79,10 @@ app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/
   });
 });
 
+app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
+    res.sendFile(path.join(__dirname, 'public', 'index.ejs'));
+    }
+)
 // Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
