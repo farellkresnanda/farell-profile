@@ -1,0 +1,23 @@
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <ul>
+      <li class="<%= activeSection === 'about' ? 'active' : '' %>">
+        <a href="/"><i class="fas fa-user"></i> Tentang</a>
+      </li>
+      <li class="<%= activeSection === 'experience' ? 'active' : '' %>">
+        <a href="/experience"><i class="fas fa-briefcase"></i> Pengalaman</a>
+      </li>
+      <li class="<%= activeSection === 'education' ? 'active' : '' %>">
+        <a href="/education"><i class="fas fa-graduation-cap"></i> Pendidikan</a>
+      </li>
+      <li class="<%= activeSection === 'skills' ? 'active' : '' %>">
+        <a href="/skills"><i class="fas fa-code"></i> Kedhilan</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="https://magenta.bumm.go.id/profil/cv?tab=academic" target="_blank" class="external-link">
+      <i class="fas fa-external-link-alt"></i> Academic Profile
+    </a>
+  </div>
+</aside>
