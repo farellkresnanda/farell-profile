@@ -62,7 +62,7 @@ const profileData = {
 };
 
 // Routes
-app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
+app.get('profile/', (req, res) => {
   res.render('index', { 
     title: `${profileData.name} - Profile`, 
     profile: profileData,
@@ -70,7 +70,7 @@ app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
   });
 });
 
-app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/:section
+app.get('profile/:section', (req, res) => {
   const section = req.params.section;
   res.render('index', { 
     title: `${profileData.name} - ${section.charAt(0).toUpperCase() + section.slice(1)}`, 
@@ -78,16 +78,6 @@ app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/
     activeSection: section
   });
 });
-
-app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
-    res.sendFile(path.join(__dirname, 'public', 'index.ejs'));
-    }
-)
-
-app.get('/images/:section', (req, res) => {  // Perbaiki rute menjadi /profile
-    res.sendFile(path.join(__dirname, 'public/images', req.params.section));
-    }
-)
 
 // Start server
 const PORT = process.env.PORT || 3001;
