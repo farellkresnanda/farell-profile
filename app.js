@@ -5,6 +5,13 @@ const app = express();
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '/public')));
+app.use((req, res, next) => {
+  if (req.headers['x-forwarded-proto'] === 'http') {
+    return res.redirect(301, 'https://' + req.headers.host + req.url);
+  }
+  next();
+});
+
 
 // Set up EJS as view engine
 app.set('views', path.join(__dirname, 'views'));
