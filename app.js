@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 // Profile data (from your CV)
 const profileData = {
   name: "Farell Kresnanda",
@@ -84,3 +85,4 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
+
