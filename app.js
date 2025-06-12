@@ -83,6 +83,12 @@ app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
     res.sendFile(path.join(__dirname, 'public', 'index.ejs'));
     }
 )
+
+app.get('/images/:section', (req, res) => {  // Perbaiki rute menjadi /profile
+    res.sendFile(path.join(__dirname, 'public/images', req.params.section));
+    }
+)
+
 // Start server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
