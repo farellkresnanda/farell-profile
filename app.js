@@ -1,7 +1,15 @@
 require('dotenv').config();
 const express = require('express');
+const https = require('https');
 const path = require('path');
 const app = express();
+const fs = require('fs');
+
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/profile.kresnansite.my.id/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/profile.kresnansite.my.id/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/profile.kresnansite.my.id/chain.pem'),
+};
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '/public')));
@@ -82,7 +90,7 @@ app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/
 
 // Start server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
+https.createServer(sslOptions, app).listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on https://profile.kresnansite.my.id:${PORT}`);
 });
 
