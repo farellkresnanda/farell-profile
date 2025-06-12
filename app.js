@@ -62,7 +62,7 @@ const profileData = {
 };
 
 // Routes
-app.get('profile/', (req, res) => {
+app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
   res.render('index', { 
     title: `${profileData.name} - Profile`, 
     profile: profileData,
@@ -70,7 +70,7 @@ app.get('profile/', (req, res) => {
   });
 });
 
-app.get('profile/:section', (req, res) => {
+app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/:section
   const section = req.params.section;
   res.render('index', { 
     title: `${profileData.name} - ${section.charAt(0).toUpperCase() + section.slice(1)}`, 
