@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 // Set up EJS as view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('trust proxy', true);
 
 
 // Profile data (from your CV)
