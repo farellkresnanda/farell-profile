@@ -49,6 +49,10 @@ const profileData = {
       graduation: "Juni 2022"
     }
   ],
+  social: [
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/farell-kresnanda-2b0a1b1b6/', icon: 'fab fa-linkedin' },
+    { name: 'GitHub', url: 'https://github.com/farellkresnanda', icon: 'fab fa-github' },
+  ],
   skills: {
     hard: [
       "DevOps", "Linux", "Administrasi Server", "Virtualisasi", 
@@ -63,20 +67,35 @@ const profileData = {
 };
 
 // Routes
-app.get('/profile', (req, res) => {  // Perbaiki rute menjadi /profile
-  res.render('index', { 
-    title: `${profileData.name} - Profile`, 
+app.get('/', (req, res) => {
+  res.render('index', {
+    title: `${profileData.name} - About Me`,
     profile: profileData,
-    activeSection: 'about'
+    activeSection: 'about',
   });
 });
 
-app.get('/profile/:section', (req, res) => {  // Perbaiki rute menjadi /profile/:section
-  const section = req.params.section;
-  res.render('index', { 
-    title: `${profileData.name} - ${section.charAt(0).toUpperCase() + section.slice(1)}`, 
+app.get('/experience', (req, res) => {
+  res.render('index', {
+    title: `${profileData.name} - Experience`,
     profile: profileData,
-    activeSection: section
+    activeSection: 'experience',
+  });
+});
+
+app.get('/education', (req, res) => {
+  res.render('index', {
+    title: `${profileData.name} - Education`,
+    profile: profileData,
+    activeSection: 'education',  
+  });
+});
+
+app.get('/skills', (req, res) => {
+  res.render('index', {
+    title: `${profileData.name} - Skills`,
+    profile: profileData,
+    activeSection: 'skills', 
   });
 });
 
