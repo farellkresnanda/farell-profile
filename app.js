@@ -4,16 +4,16 @@ const path = require('path');
 const app = express();
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up EJS as view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
-// Profile data (from your CV)
+// Profile data
 const profileData = {
   name: "Farell Kresnanda",
+  title: "IT Student | Network & Cybersecurity Enthusiast",
   location: "Kota Depok",
   email: "kresnandaf@gmail.com",
   phone: "+6282124873745",
@@ -23,19 +23,22 @@ const profileData = {
       position: "Research and Development's DevOps",
       period: "April 2025 – Saat Ini",
       organization: "Central Computer Improvement • Organisasi",
-      description: "Terlibat dalam proyek proyek di dalam CCI RnD di bidang DevOps, seperti setup dan pemeliharaan server serta mendeplov web app yang mengimplementasikan CI/CD ke public."
+      description: "Terlibat dalam proyek proyek di dalam CCI RnD di bidang DevOps, seperti setup dan pemeliharaan server serta mendeplov web app yang mengimplementasikan CI/CD ke public.",
+      skills: ["DevOps", "CI/CD", "Server Management"]
     },
     {
       position: "Kepala Divisi Network",
       period: "November 2024 – Saat Ini",
       organization: "Central Computer Improvement • Organisasi",
-      description: "Menjalankan program study group yang memperlajari bukan hanya ilmu jaringan dasar, tetapi juga ilmu jaringan yang akan di implementasikan di dalam dunia industri."
+      description: "Menjalankan program study group yang memperlajari bukan hanya ilmu jaringan dasar, tetapi juga ilmu jaringan yang akan di implementasikan di dalam dunia industri.",
+      skills: ["Networking", "Team Leadership", "Training"]
     },
     {
       position: "Anggota Divisi Network",
       period: "December 2023–Oktober 2024",
       organization: "Central Computer Improvement • Organisasi",
-      description: "Menjadi anggota study group yang memperlajari dasar – dasar jaringan seperti infrastruktur jaringan."
+      description: "Menjadi anggota study group yang memperlajari dasar – dasar jaringan seperti infrastruktur jaringan.",
+      skills: ["Networking Fundamentals", "Cisco Devices"]
     }
   ],
   education: [
@@ -55,13 +58,22 @@ const profileData = {
   ],
   skills: {
     hard: [
-      "DevOps", "Linux", "Administrasi Server", "Virtualisasi", 
-      "Keterampilan dasar jaringan", "Perangkat keras Cisco (router, switch)", 
-      "Desain dan arsitektur jaringan", "Penulisan laporan"
+      "DevOps", 
+      "Linux", 
+      "Administrasi Server", 
+      "Virtualisasi",
+      "Keterampilan dasar jaringan", 
+      "Perangkat keras Cisco (router, switch)",
+      "Desain dan arsitektur jaringan", 
+      "Penulisan laporan"
     ],
     soft: [
-      "Adaptabilitas", "Problem-solving", "Mendengarkan aktif", 
-      "Keterampilan mangiemen konflik", "Komitmen", "Kerjasama Tim"
+      "Adaptabilitas", 
+      "Problem-solving", 
+      "Mendengarkan aktif",
+      "Keterampilan mangiemen konflik", 
+      "Komitmen", 
+      "Kerjasama Tim"
     ]
   }
 };
@@ -104,4 +116,3 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
 });
-

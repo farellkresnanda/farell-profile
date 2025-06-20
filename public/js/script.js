@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile menu toggle functionality
+  // Mobile menu functionality
   const mobileMenuToggle = document.createElement('div');
   mobileMenuToggle.className = 'mobile-menu-toggle';
   mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
@@ -8,55 +8,83 @@ document.addEventListener('DOMContentLoaded', function() {
   header.appendChild(mobileMenuToggle);
   
   const sidebar = document.querySelector('.sidebar');
+  const overlay = document.createElement('div');
+  overlay.className = 'sidebar-overlay';
   
-  mobileMenuToggle.addEventListener('click', function() {
+  document.body.appendChild(overlay);
+  
+  function toggleMenu() {
     sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
     mobileMenuToggle.classList.toggle('active');
-  });
+    document.body.classList.toggle('no-scroll');
+  }
   
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
+  mobileMenuToggle.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
   
-  // Animation for sections when they come into view
-  const animateOnScroll = function() {
-    const sections = document.querySelectorAll('section');
+  // Animation for elements when they come into view
+  const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.animate__animated');
     
-    sections.forEach(section => {
-      const sectionTop = section.getBoundingClientRect().top;
+    elements.forEach(element => {
+      const elementPosition = element.getBoundingClientRect().top;
       const windowHeight = window.innerHeight;
       
-      if (sectionTop < windowHeight * 0.75) {
-        section.style.opacity = '1';
-        section.style.transform = 'translateY(0)';
+      if (elementPosition < windowHeight - 100) {
+        const animationClass = element.classList[1];
+        element.style.opacity = '1';
+        element.classList.add(animationClass);
       }
     });
   };
   
-  // Set initial state for animation
-  const sections = document.querySelectorAll('section');
-  sections.forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  window.addEventListener('scroll', animateOnScroll);
+  animateOnScroll(); // Run once on load
+  
+  // Smooth hover effects for profile image
+  const profileImage = document.querySelector('.profile-image');
+  if (profileImage) {
+    profileImage.addEventListener('mouseenter', () => {
+      gsap.to('.image-hover-effect', { 
+        opacity: 1,
+        duration: 0.3
+      });
+    });
+    
+    profileImage.addEventListener('mouseleave', () => {
+      gsap.to('.image-hover-effect', { 
+        opacity: 0,
+        duration: 0.3
+      });
+    });
+  }
+  
+  // Social icons animation
+  const socialIcons = document.querySelectorAll('.social-icon');
+  socialIcons.forEach(icon => {
+    icon.addEventListener('mouseenter', () => {
+      gsap.to(icon, {
+        y: -5,
+        duration: 0.2
+      });
+    });
+    
+    icon.addEventListener('mouseleave', () => {
+      gsap.to(icon, {
+        y: 0,
+        duration: 0.2
+      });
+    });
   });
   
-  // Run once on load
-  animateOnScroll();
-  
-  // Run on scroll
-  window.addEventListener('scroll', animateOnScroll);
+  // Animate progress bars
+  const progressBars = document.querySelectorAll('.progress-bar');
+  progressBars.forEach(bar => {
+    const width = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => {
+      bar.style.width = width;
+    }, 300);
+  });
 });
