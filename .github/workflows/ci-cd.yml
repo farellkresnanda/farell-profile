@@ -21,8 +21,10 @@ jobs:
       uses: docker/setup-buildx-action@v1  # Setup Docker Buildx
 
     - name: Build Docker image
-      run: docker build -t my-node-app .  # Membangun Docker image dengan nama "my-portfolio-app"
-
+      run: |
+        cd farell-profile
+        docker build -t my-node-app .  # Membangun Docker image dengan nama "my-portfolio-app"
+        
     - name: Run tests (optional)
       run: |
         docker run --rm my-node-app npm test  # Menjalankan pengujian aplikasi jika ada
