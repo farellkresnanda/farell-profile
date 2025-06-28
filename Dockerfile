@@ -17,7 +17,8 @@ RUN npm install
 COPY . .
 
 # Ekspos port yang digunakan oleh aplikasi
-EXPOSE 3000
+#EXPOSE 3000
+EXPOSE 3001
 
 # Jalankan aplikasi dengan PM2
 #CMD ["pm2", "start", "npm", "--", "start", "--name", "portfolio:3001"]
