@@ -45,7 +45,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
           # Arahkan ke direktori aplikasi di VPS Anda
-          cd /path/to/your/app
+          cd /farell-profile
 
           # Tarik Docker image terbaru dari Docker Hub (jika Anda mempush image ke Docker Hub) atau build ulang di VPS
           docker build -t my-portfolio-app .
