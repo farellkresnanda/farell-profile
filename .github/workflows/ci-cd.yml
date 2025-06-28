@@ -1,57 +1,58 @@
-name: CI/CD for Node.js Portfolio (Docker)
+name: 🚀 CI/CD Development
 
 on:
   push:
     branches:
-      - main  # Workflow akan berjalan pada saat push ke cabang main
-  pull_request:
-    branches:
-      - main  # Workflow juga akan berjalan pada saat pull request ke cabang main
-
+      - farell
+      
 jobs:
-  # Job untuk Build Docker image
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment: Docker-Test
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4  # Checkout repository
+      - name: 📦 Checkout Code
+        uses: actions/checkout@v4
 
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v1  # Setup Docker Buildx
+      - name: 🧰 Setup Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-    - name: Build Docker image
-      run: |
-        cd /farell-profile
-        docker build -t my-node-app .  # Membangun Docker image dengan nama "my-portfolio-app"
-        
-    - name: Run tests (optional)
-      run: |
-        docker run --rm my-node-app npm test  # Menjalankan pengujian aplikasi jika ada
+      - name: 📥 Install Dependencies
+        run: npm install
 
-  # Job untuk deploy ke VPS
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build  # Pastikan deploy dijalankan setelah build selesai
+      - name: 🔐 Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4  # Checkout repository
+      - name: 🛠 Build Docker Image
+        run: docker build -t kresnandaf/farell-profile:latest .
 
-    - name: Set up SSH for VPS
-      uses: webfactory/ssh-agent@v0.5.3  # Menggunakan SSH Agent untuk VPS
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # SSH private key yang disimpan di GitHub Secrets
+      - name: 📤 Push Docker Image
+        run: docker push kresnandaf/farell-profile:latest
 
-    - name: Deploy to VPS using Docker
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_IP }} << 'EOF'
-          # Arahkan ke direktori aplikasi di VPS Anda
-          cd /farell-profile
+      - name: 🚢 Deploy to VPS Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "🔁 Pulling latest Docker image..."
+            docker pull kresnandaf/farell-profile:latest
 
-          # Tarik Docker image terbaru dari Docker Hub (jika Anda mempush image ke Docker Hub) atau build ulang di VPS
-          docker build -t my-portfolio-app .
+            echo "🛑 Stopping and removing old container (if exists)..."
+            docker stop farell-profile || true
+            docker rm farell-profile || true
 
-          # Jalankan container dengan image yang baru
-          docker run -d -p 3001:3001 --restart always --name portfolio-app my-portfolio-app
-        EOF
+            echo "🚀 Running new container..."
+            docker run -d \
+              --name farell-profile \
+              --restart unless-stopped \
+              -p "${{ secrets.PORT }}":3000 \
+              kresnandaf/farell-profile:latest
+
+            echo "🧹 Cleaning up unused Docker resources..."
+            docker system prune -f
+
+            echo "✅ Deployment to Development environment completed successfully!"
