@@ -22,7 +22,7 @@ jobs:
 
     - name: Build Docker image
       run: |
-        cd farell-profile
+        cd /farell-profile
         docker build -t my-node-app .  # Membangun Docker image dengan nama "my-portfolio-app"
         
     - name: Run tests (optional)
