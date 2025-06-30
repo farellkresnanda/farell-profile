@@ -49,7 +49,7 @@ jobs:
             docker run -d \
               --name farell-profile \
               --restart unless-stopped \
-              -p "${{ secrets.PORT }}":3000 \
+              -p "${{ secrets.PORT }}":3001 \
               kresnandaf/farell-profile:latest
 
             echo "🧹 Cleaning up unused Docker resources..."
