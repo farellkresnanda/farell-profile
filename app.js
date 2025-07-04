@@ -23,7 +23,7 @@ const profileData = {
       position: "Research and Development's DevOps",
       period: "April 2025 – Saat Ini",
       organization: "Central Computer Improvement • Organisasi",
-      description: "Terlibat dalam proyek proyek di dalam CCI RnD di bidang DevOps, seperti setup dan pemeliharaan server serta mendeplov web app yang mengimplementasikan CI/CD ke public.",
+      description: "Terlibat dalam proyek proyek di dalam CCI RnD di bidang DevOps, seperti setup dan pemeliharaan server serta mendeploy web app yang mengimplementasikan CI/CD ke public.",
       skills: ["DevOps", "CI/CD", "Server Management"]
     },
     {
