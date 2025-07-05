@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header') %>
+    <title>Pendidikan <%= profile.name %></title>
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+        
+        main.container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .education-item {
+            margin-bottom: 2rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #00ffe7;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00ffe7;
+            box-shadow: 0 0 0 4px rgba(0, 255, 231, 0.2);
+        }
+    </style>
+</head>
+<body class="dark-theme d-flex flex-column min-vh-100">
+    <div id="particles-js"></div>
+    
+    <%- include('partials/navbar') %>
+
+    <main class="container py-5 mt-5 flex-grow-1">
+        <h1 class="display-4 mb-5 neon-text">Riwayat Pendidikan</h1>
+        
+        <div class="timeline">
+            <div class="timeline-item glass-card p-4">
+                <h3 class="neon-text">Telkom University</h3>
+                <p class="text-muted">2022 - Sekarang</p>
+                <p>S1 Teknologi Informasi - IPK: 3.81</p>
+            </div>
+            
+            <div class="timeline-item glass-card p-4">
+                <h3 class="neon-text">SMKN 1 CIBINONG</h3>
+                <p class="text-muted">2019 - 2022</p>
+                <p>Teknik Komputer Jaringan - Nilai rata-rata: 86.99</p>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/particles.js"></script>
+    <%- include('partials/particles-config') %>
+</body>
+</html>

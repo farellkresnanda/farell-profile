@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header') %>
+    <title>Kontak <%= profile.name %></title>
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+        
+        main.container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-form {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(12px);
+        }
+        
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-color: #00ffe7;
+            box-shadow: 0 0 0 0.25rem rgba(0, 255, 231, 0.25);
+        }
+    </style>
+</head>
+<body class="dark-theme d-flex flex-column min-vh-100">
+    <div id="particles-js"></div>
+    
+    <%- include('partials/navbar') %>
+
+    <main class="container py-5 mt-5 flex-grow-1">
+        <div class="row">
+            <div class="col-lg-6 mb-5">
+                <h1 class="display-4 mb-4 neon-text">Hubungi Saya</h1>
+                <div class="glass-card p-4">
+                    <h4 class="neon-text mb-3">Informasi Kontak</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <i class="fas fa-envelope me-2" style="color: #00ffe7;"></i>
+                            kresnandaf@gmail.com
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-phone me-2" style="color: #00ffe7;"></i>
+                            +6282124873745
+                        </li>
+                        <li class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2" style="color: #00ffe7;"></i>
+                            Kota Depok, Indonesia
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="glass-card p-4">
+                    <h4 class="neon-text mb-3">Kirim Pesan</h4>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Nama Anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email Anda" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Pesan Anda" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/particles.js"></script>
+    <%- include('partials/particles-config') %>
+</body>
+</html>

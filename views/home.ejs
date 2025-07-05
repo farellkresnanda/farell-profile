@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header') %>
+    <title><%= profile.name %> - Home</title>
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+        }
+        main, nav, footer {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div id="particles-js"></div>
+    <%- include('partials/navbar') %>
+
+    <main class="container py-5 mt-5">
+        <section class="hero-section min-vh-100 d-flex align-items-center">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold mb-4 neon-text"><%= profile.name %></h1>
+                    <h2 class="text-primary mb-4"><%= profile.title %></h2>
+                    <div class="d-flex gap-3 my-4">
+                        <a href="/contact" class="btn btn-primary btn-lg rounded-pill px-4">
+                            Hubungi Saya
+                        </a>
+                        <a href="/projects" class="btn btn-outline-primary btn-lg rounded-pill px-4">
+                            Lihat Proyek
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/images/profile.jpg" alt="Profile" 
+                         class="img-fluid rounded-circle border border-4 border-primary animate-float"
+                         width="350">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <!-- Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+    particlesJS('particles-js', {
+      "particles": {
+        "number": {
+          "value": 60,
+          "density": { "enable": true, "value_area": 800 }
+        },
+        "color": { "value": "#00bfff" },
+        "shape": {
+          "type": "circle",
+          "stroke": { "width": 0, "color": "#000000" }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": true,
+          "anim": { "enable": false }
+        },
+        "size": {
+          "value": 4,
+          "random": true,
+          "anim": { "enable": false }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#00bfff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" },
+          "resize": true
+        },
+        "modes": {
+          "repulse": { "distance": 100, "duration": 0.4 },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+    </script>
+</body>
+</html>

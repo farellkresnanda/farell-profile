@@ -1,90 +1,100 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Mobile menu functionality
-  const mobileMenuToggle = document.createElement('div');
-  mobileMenuToggle.className = 'mobile-menu-toggle';
-  mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-  
-  const header = document.querySelector('header');
-  header.appendChild(mobileMenuToggle);
-  
-  const sidebar = document.querySelector('.sidebar');
-  const overlay = document.createElement('div');
-  overlay.className = 'sidebar-overlay';
-  
-  document.body.appendChild(overlay);
-  
-  function toggleMenu() {
-    sidebar.classList.toggle('active');
-    overlay.classList.toggle('active');
-    mobileMenuToggle.classList.toggle('active');
-    document.body.classList.toggle('no-scroll');
-  }
-  
-  mobileMenuToggle.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', toggleMenu);
-  
-  // Animation for elements when they come into view
-  const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.animate__animated');
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const navbarToggler = document.getElementById('navbarToggler');
+    const navbarLinks = document.getElementById('navbarLinks');
     
-    elements.forEach(element => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      
-      if (elementPosition < windowHeight - 100) {
-        const animationClass = element.classList[1];
-        element.style.opacity = '1';
-        element.classList.add(animationClass);
-      }
+    navbarToggler.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navbarLinks.classList.toggle('active');
     });
-  };
-  
-  window.addEventListener('scroll', animateOnScroll);
-  animateOnScroll(); // Run once on load
-  
-  // Smooth hover effects for profile image
-  const profileImage = document.querySelector('.profile-image');
-  if (profileImage) {
-    profileImage.addEventListener('mouseenter', () => {
-      gsap.to('.image-hover-effect', { 
-        opacity: 1,
-        duration: 0.3
-      });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Close mobile menu if open
+            navbarToggler.classList.remove('active');
+            navbarLinks.classList.remove('active');
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
+
+    // Animate elements on scroll
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
     
-    profileImage.addEventListener('mouseleave', () => {
-      gsap.to('.image-hover-effect', { 
-        opacity: 0,
-        duration: 0.3
-      });
-    });
-  }
-  
-  // Social icons animation
-  const socialIcons = document.querySelectorAll('.social-icon');
-  socialIcons.forEach(icon => {
-    icon.addEventListener('mouseenter', () => {
-      gsap.to(icon, {
-        y: -5,
-        duration: 0.2
-      });
-    });
+    function checkAnimation() {
+        animateElements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
+                element.classList.add('animated');
+            }
+        });
+    }
     
-    icon.addEventListener('mouseleave', () => {
-      gsap.to(icon, {
-        y: 0,
-        duration: 0.2
-      });
+    // Initial check
+    checkAnimation();
+    
+    // Check on scroll
+    window.addEventListener('scroll', checkAnimation);
+
+    // Initialize particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: "#ffffff" },
+            shape: { type: "circle" },
+            opacity: { value: 0.5, random: true },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: { enable: true, mode: "repulse" },
+                onclick: { enable: true, mode: "push" }
+            }
+        }
     });
-  });
-  
-  // Animate progress bars
-  const progressBars = document.querySelectorAll('.progress-bar');
-  progressBars.forEach(bar => {
-    const width = bar.style.width;
-    bar.style.width = '0';
-    setTimeout(() => {
-      bar.style.width = width;
-    }, 300);
-  });
+
+    // Skill bar animation
+    const skillBars = document.querySelectorAll('.skill-progress');
+    skillBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => {
+            bar.style.width = width;
+        }, 500);
+    });
+
+    // Download CV button
+    const downloadBtn = document.querySelector('.download-cv-btn');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function() {
+            // Replace with actual CV download link
+            window.open('documents/CV - Farell Kresnanda.pdf', '_blank');
+        });
+    }
 });

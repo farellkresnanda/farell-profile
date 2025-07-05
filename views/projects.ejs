@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header') %>
+    <title>Proyek <%= profile.name %></title>
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+        
+        main.container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .project-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+<body class="dark-theme d-flex flex-column min-vh-100">
+    <div id="particles-js"></div>
+    
+    <%- include('partials/navbar') %>
+
+    <main class="container py-5 mt-5 flex-grow-1">
+        <h1 class="display-4 mb-5 neon-text">Proyek Terbaru</h1>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="glass-card p-4 project-card">
+                    <h3 class="neon-text">Implementasi CI/CD Pipeline</h3>
+                    <p class="text-muted">Central Computer Improvement</p>
+                    <p>Membangun pipeline CI/CD untuk deployment otomatis aplikasi web</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="glass-card p-4 project-card">
+                    <h3 class="neon-text">Study Group Jaringan</h3>
+                    <p class="text-muted">Central Computer Improvement</p>
+                    <p>Mengembangkan materi pembelajaran jaringan komputer untuk anggota</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="/js/particles.js"></script>
+    <%- include('partials/particles-config') %>
+</body>
+</html>

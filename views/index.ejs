@@ -1,245 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <%- include('partials/header') %>
 </head>
 <body>
-  <%- include('partials/header') %>
-  
-  <div class="container">
-    <%- include('partials/sidebar') %>
-    
-    <main class="main-content">
-      <% if (activeSection === 'about') { %>
-        <section class="landing animate__animated animate__fadeIn">
-          <div class="profile-image-container">
-            <div class="image-wrapper">
-              <img src="/images/profile.jpg" alt="<%= profile.name %>" class="profile-image">
-              <div class="image-hover-effect"></div>
+    <!-- Navigation -->
+    <%- include('partials/navbar') %>
+
+    <!-- Hero Section with Particle Background -->
+    <div class="hero-section" id="home">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <div class="profile-image-container">
+                <img src="/images/profile.jpg" alt="Farell Kresnanda" class="profile-image">
+                <div class="image-border-animation"></div>
             </div>
-            <div class="social-links">
-              <% profile.social.forEach(social => { %>
-                <a href="<%= social.url %>" target="_blank" class="social-icon" aria-label="<%= social.name %>">
-                  <i class="<%= social.icon %>"></i>
-                </a>
-              <% }); %>
+            <h1 class="animated-title">Farell Kresnanda</h1>
+            <p class="animated-subtitle">DevOps & Network Enthusiast</p>
+            <div class="social-icons">
+                <a href="#" class="icon-link"><i class="fa fa-linkedin"></i></a>
+                <a href="#" class="icon-link"><i class="fa fa-github"></i></a>
+                <a href="#" class="icon-link"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="icon-link"><i class="fa fa-envelope"></i></a>
             </div>
-          </div>
-          <h1 class="name"><span class="name-highlight"><%= profile.name %></span></h1>
-          <p class="professional-title"><%= profile.title %></p>
-        </section>
-        
-        <section class="about-section animate__animated animate__fadeInUp">
-          <h2 class="section-title"><span class="title-decoration">About Me</span></h2>
-          <div class="about-content">
-            <p><%= profile.about %></p>
-            <div class="contact-info">
-              <div class="contact-card">
-                <i class="fas fa-map-marker-alt contact-icon"></i>
-                <div>
-                  <h4>Location</h4>
-                  <p><%= profile.location %></p>
+            <div class="scroll-down">
+                <div class="mouse">
+                    <div class="scroller"></div>
                 </div>
-              </div>
-              <div class="contact-card">
-                <i class="fas fa-envelope contact-icon"></i>
-                <div>
-                  <h4>Email</h4>
-                  <p><a href="mailto:<%= profile.email %>"><%= profile.email %></a></p>
-                </div>
-              </div>
-              <div class="contact-card">
-                <i class="fas fa-phone contact-icon"></i>
-                <div>
-                  <h4>Phone</h4>
-                  <p><a href="tel:<%= profile.phone %>"><%= profile.phone %></a></p>
-                </div>
-              </div>
             </div>
-          </div>
-        </section>
-      <% } else if (activeSection === 'experience') { %>
-        <section class="experience-section">
-          <h2 class="section-title"><span class="title-decoration">Work Experience</span></h2>
-          <div class="timeline">
-            <% profile.experiences.forEach(exp => { %>
-              <div class="timeline-item animate__animated animate__fadeInRight">
-                <div class="timeline-badge"></div>
-                <div class="timeline-content">
-                  <h3 class="timeline-position"><%= exp.position %></h3>
-                  <div class="timeline-meta">
-                    <span class="timeline-org"><%= exp.organization %></span>
-                    <span class="timeline-period"><i class="far fa-calendar-alt"></i> <%= exp.period %></span>
-                  </div>
-                  <p class="timeline-description"><%= exp.description %></p>
-                  <% if (exp.skills && exp.skills.length) { %>
-                    <div class="timeline-skills">
-                      <% exp.skills.forEach(skill => { %>
-                        <span class="skill-tag"><%= skill %></span>
-                      <% }); %>
-                    </div>
-                  <% } %>
-                </div>
-              </div>
-            <% }); %>
-          </div>
-        </section>
-      <% } else if (activeSection === 'education') { %>
-        <section class="education-section">
-          <h2 class="section-title"><span class="title-decoration">Education</span></h2>
-          <div class="education-grid">
-            <% profile.education.forEach(edu => { %>
-              <div class="education-card animate__animated animate__zoomIn">
-                <div class="education-header">
-                  <i class="fas fa-graduation-cap education-icon"></i>
-                  <h3 class="education-institution"><%= edu.institution %></h3>
-                </div>
-                <div class="education-body">
-                  <p class="education-degree"><%= edu.degree %></p>
-                  <% if (edu.graduation) { %>
-                    <div class="education-meta">
-                      <span class="graduation-year"><i class="far fa-calendar-check"></i> Graduated: <%= edu.graduation %></span>
-                    </div>
-                  <% } %>
-                  <% if (edu.achievements && edu.achievements.length) { %>
-                    <div class="education-achievements">
-                      <h4>Achievements:</h4>
-                      <ul>
-                        <% edu.achievements.forEach(ach => { %>
-                          <li><%= ach %></li>
-                        <% }); %>
-                      </ul>
-                    </div>
-                  <% } %>
-                </div>
-              </div>
-            <% }); %>
-          </div>
-        </section>
-      <% } else if (activeSection === 'skills') { %>
-        <section class="skills-section">
-          <h2 class="section-title"><span class="title-decoration">Skills</span></h2>
-          <div class="skills-container">
-            <div class="skills-column">
-              <div class="skills-card">
-                <h3 class="skills-category"><i class="fas fa-code"></i> Technical Skills</h3>
-                <div class="skills-list">
-                  <% profile.skills.hard.forEach(skill => { %>
-                    <div class="skill-item">
-                      <div class="skill-info">
-                        <span class="skill-name"><%= skill.name || skill %></span>
-                        <% if (skill.level) { %>
-                          <span class="skill-level"><%= skill.level %>%</span>
-                        <% } %>
-                      </div>
-                      <% if (skill.level) { %>
-                        <div class="skill-progress">
-                          <div class="progress-bar" style="width: '<%= skill.level %>%'"></div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="section-container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p><%= profile.about %></p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fa fa-map-marker"></i>
+                            <span><%= profile.location %></span>
                         </div>
-                      <% } %>
+                        <div class="info-item">
+                            <i class="fa fa-envelope"></i>
+                            <span><%= profile.email %></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa fa-phone"></i>
+                            <span><%= profile.phone %></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa fa-graduation-cap"></i>
+                            <span>Telkom University</span>
+                        </div>
                     </div>
-                  <% }); %>
+                    <button class="download-cv-btn">Download CV</button>
                 </div>
-              </div>
+                <div class="skills-chart">
+                    <div class="skill-category">
+                        <h3>Hard Skills</h3>
+                        <% profile.skills.hard.forEach(skill => { %>
+                        <div class="skill-item">
+                            <div class="skill-name"><%= skill %></div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: <%= Math.floor(Math.random() * 60) + 40 %>%"></div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Soft Skills</h3>
+                        <% profile.skills.soft.forEach(skill => { %>
+                        <div class="skill-item">
+                            <div class="skill-name"><%= skill %></div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: <%= Math.floor(Math.random() * 60) + 40 %>%"></div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                </div>
             </div>
-            <div class="skills-column">
-              <div class="skills-card">
-                <h3 class="skills-category"><i class="fas fa-users"></i> Soft Skills</h3>
-                <div class="skills-tags">
-                  <% profile.skills.soft.forEach(skill => { %>
-                    <span class="soft-skill-tag"><%= skill %></span>
-                  <% }); %>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section experience-section" id="experience">
+        <div class="section-container">
+            <h2 class="section-title">Pengalaman</h2>
+            <div class="timeline">
+                <% profile.experiences.forEach((exp, index) => { %>
+                <div class="timeline-item <%= index % 2 === 0 ? 'left' : 'right' %>">
+                    <div class="timeline-content">
+                        <div class="timeline-date"><%= exp.period %></div>
+                        <h3 class="timeline-title"><%= exp.role %></h3>
+                        <h4 class="timeline-subtitle"><%= exp.organization %></h4>
+                        <p class="timeline-description"><%= exp.description %></p>
+                        <div class="timeline-icon">
+                            <i class="fa fa-briefcase"></i>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <% if (profile.skills.tools && profile.skills.tools.length) { %>
-                <div class="skills-card">
-                  <h3 class="skills-category"><i class="fas fa-tools"></i> Tools</h3>
-                  <div class="tools-grid">
-                    <% profile.skills.tools.forEach(tool => { %>
-                      <div class="tool-item">
-                        <% if (tool.icon) { %>
-                          <i class="<%= tool.icon %> tool-icon"></i>
-                        <% } %>
-                        <span class="tool-name"><%= tool.name || tool %></span>
-                      </div>
-                    <% }); %>
-                  </div>
-                </div>
-              <% } %>
+                <% }); %>
             </div>
-          </div>
-        </section>
-      <% } %>
-    </main>
-  </div>
-  
-  <%- include('partials/footer') %>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-  <script src="/js/script.js"></script>
-  <script>
-    // Animation for elements when they come into view
-    document.addEventListener('DOMContentLoaded', function() {
-      const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.animate__animated');
-        
-        elements.forEach(element => {
-          const elementPosition = element.getBoundingClientRect().top;
-          const windowHeight = window.innerHeight;
-          
-          if (elementPosition < windowHeight - 100) {
-            const animationClass = element.classList[1];
-            element.style.opacity = '1';
-            element.classList.add(animationClass);
-          }
-        });
-      };
-      
-      window.addEventListener('scroll', animateOnScroll);
-      animateOnScroll(); // Run once on load
-      
-      // Smooth hover effects
-      const profileImage = document.querySelector('.profile-image');
-      if (profileImage) {
-        profileImage.addEventListener('mouseenter', () => {
-          gsap.to('.image-hover-effect', { 
-            opacity: 1,
-            duration: 0.3
-          });
-        });
-        
-        profileImage.addEventListener('mouseleave', () => {
-          gsap.to('.image-hover-effect', { 
-            opacity: 0,
-            duration: 0.3
-          });
-        });
-      }
-      
-      // Social icons animation
-      const socialIcons = document.querySelectorAll('.social-icon');
-      socialIcons.forEach(icon => {
-        icon.addEventListener('mouseenter', () => {
-          gsap.to(icon, {
-            y: -5,
-            duration: 0.2
-          });
-        });
-        
-        icon.addEventListener('mouseleave', () => {
-          gsap.to(icon, {
-            y: 0,
-            duration: 0.2
-          });
-        });
-      });
-    });
-  </script>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section education-section" id="education">
+        <div class="section-container">
+            <h2 class="section-title">Pendidikan</h2>
+            <div class="education-cards">
+                <% profile.education.forEach(edu => { %>
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fa fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="education-institution"><%= edu.institution %></h3>
+                    <p class="education-degree"><%= edu.degree %></p>
+                    <p class="education-details"><%= edu.details %></p>
+                    <div class="education-decoration"></div>
+                </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects-section" id="projects">
+        <div class="section-container">
+            <h2 class="section-title">Proyek</h2>
+            <div class="project-gallery">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/images/projects/devops.jpg" alt="DevOps Project">
+                        <div class="project-overlay">
+                            <h3>CI/CD Implementation</h3>
+                            <p>Setup pipeline untuk aplikasi web</p>
+                            <button class="project-details-btn">Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/images/projects/network.jpg" alt="Network Project">
+                        <div class="project-overlay">
+                            <h3>Network Infrastructure</h3>
+                            <p>Desain arsitektur jaringan</p>
+                            <button class="project-details-btn">Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="/images/projects/security.jpg" alt="Security Project">
+                        <div class="project-overlay">
+                            <h3>Security Assessment</h3>
+                            <p>Analisis keamanan sistem</p>
+                            <button class="project-details-btn">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+        <div class="section-container">
+            <h2 class="section-title">Kontak</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fa fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p><%= profile.email %></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa fa-phone"></i>
+                        <div>
+                            <h3>Telepon</h3>
+                            <p><%= profile.phone %></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa fa-map-marker"></i>
+                        <div>
+                            <h3>Lokasi</h3>
+                            <p><%= profile.location %></p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subjek">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Pesan Anda" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+
+    <!-- Scripts -->
+    <script src="/js/particles.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

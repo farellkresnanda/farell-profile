@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header') %>
+    <title>Tentang <%= profile.name %></title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+        }
+        
+        main.container {
+            flex: 1 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        
+        footer {
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .progress {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: #00ffe7;
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .glass-card {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0, 255, 231, 0.2);
+        }
+        
+        .neon-text {
+            color: #00ffe7;
+            text-shadow: 0 0 8px rgba(0, 255, 231, 0.7), 0 0 16px rgba(0, 255, 231, 0.4);
+        }
+        
+        .about-section {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 255, 231, 0.1);
+        }
+        
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skill-item span {
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        h1.display-4 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lead {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .info-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .info-item i {
+            position: absolute;
+            left: 0;
+            top: 0.3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 1.5rem;
+            }
+            
+            .glass-card {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="dark-theme d-flex flex-column min-vh-100">
+    <!-- Particles.js Container -->
+    <div id="particles-js"></div>
+    
+    <%- include('partials/navbar') %>
+
+    <main class="container py-5 mt-5 flex-grow-1">
+        <section class="about-section">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="display-4 mb-4 neon-text">Tentang Saya</h1>
+                    <p class="lead"><%= profile.about %></p>
+                    
+                    <!-- Informasi Kontak -->
+                    <!--  -->
+                </div>
+                
+                <div class="col-lg-6">
+                    <!-- Hard Skills -->
+                    <div class="glass-card mb-4">
+                        <h3 class="mb-4 neon-text">Keahlian Teknis</h3>
+                        <% profile.skills.hard.forEach(skill => { %>
+                        <div class="skill-item">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><%= skill.name %></span>
+                                <span><%= skill.level %>%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: <%= skill.level %>%"></div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    
+                    <!-- Soft Skills -->
+                    <div class="glass-card">
+                        <h3 class="mb-4 neon-text">Soft Skills</h3>
+                        <div class="d-flex flex-wrap">
+                            <% profile.skills.soft.forEach(skill => { %>
+                            <span class="badge bg-dark me-2 mb-2" style="border: 1px solid #00ffe7; color: #00ffe7;">
+                                <%= skill %>
+                            </span>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 70,
+                        density: {
+                            enable: true,
+                            value_area: 1000
+                        }
+                    },
+                    color: {
+                        value: "#00ffe7"
+                    },
+                    shape: {
+                        type: "circle",
+                        stroke: {
+                            width: 0,
+                            color: "#000000"
+                        },
+                        polygon: {
+                            nb_sides: 5
+                        }
+                    },
+                    opacity: {
+                        value: 0.6,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 0.3,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 130,
+                        color: "#00ffe7",
+                        opacity: 0.4,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1.5,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "bounce",
+                        bounce: false,
+                        attract: {
+                            enable: true,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push"
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 1
+                            }
+                        },
+                        bubble: {
+                            distance: 400,
+                            size: 40,
+                            duration: 2,
+                            opacity: 8,
+                            speed: 3
+                        },
+                        push: {
+                            particles_nb: 4
+                        },
+                        remove: {
+                            particles_nb: 2
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+            
+            // Animasi progress bar
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
